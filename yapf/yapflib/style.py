@@ -276,6 +276,22 @@ def CreatePEP8Style():
   )
 
 
+def CreateTechsureStyle():
+  style = CreatePEP8Style()
+  style['ALIGN_CLOSING_BRACKET_WITH_VISUAL_INDENT'] = False
+  style['BLANK_LINE_BEFORE_NESTED_CLASS_OR_DEF'] = True
+  style['COLUMN_LIMIT'] = 119
+  style['INDENT_WIDTH'] = 4
+  style['I18N_COMMENT'] = r'#\..*'
+  style['I18N_FUNCTION_CALL'] = ['N_', '_']
+  style['SPACE_BETWEEN_ENDING_COMMA_AND_CLOSING_BRACKET'] = False
+  style['SPLIT_BEFORE_LOGICAL_OPERATOR'] = False
+  style['SPLIT_BEFORE_BITWISE_OPERATOR'] = False
+  style['SPLIT_COMPLEX_COMPREHENSION'] = True
+  style['SPLIT_PENALTY_COMPREHENSION'] = 2100
+  return style
+
+
 def CreateGoogleStyle():
   style = CreatePEP8Style()
   style['ALIGN_CLOSING_BRACKET_WITH_VISUAL_INDENT'] = False
@@ -324,6 +340,7 @@ _STYLE_NAME_TO_FACTORY = dict(
     chromium=CreateChromiumStyle,
     google=CreateGoogleStyle,
     facebook=CreateFacebookStyle,
+    techsure=CreateTechsureStyle,
 )
 
 _DEFAULT_STYLE_TO_FACTORY = [
@@ -331,6 +348,7 @@ _DEFAULT_STYLE_TO_FACTORY = [
     (CreateFacebookStyle(), CreateFacebookStyle),
     (CreateGoogleStyle(), CreateGoogleStyle),
     (CreatePEP8Style(), CreatePEP8Style),
+    (CreateTechsureStyle(),CreateTechsureStyle),
 ]
 
 
@@ -538,7 +556,7 @@ def _CreateStyleFromConfigParser(config):
 
 # The default style - used if yapf is not invoked without specifically
 # requesting a formatting style.
-DEFAULT_STYLE = 'pep8'
+DEFAULT_STYLE = 'techsure'
 DEFAULT_STYLE_FACTORY = CreatePEP8Style
 _GLOBAL_STYLE_FACTORY = CreatePEP8Style
 
